@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Food;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Integer;
-use PhpParser\Node\Scalar\String_;
 
-class FoodListingController extends Controller {
+class FoodListingController extends Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
+
     /**
      * Display a Food of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -24,7 +25,6 @@ class FoodListingController extends Controller {
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -34,8 +34,7 @@ class FoodListingController extends Controller {
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,11 +58,10 @@ class FoodListingController extends Controller {
 
     /**
      * Display the specified resource.
-     *
-     * @param  Integer  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $food = Food::find($id);
         return view('dashboard')->with('food', $food);
@@ -71,11 +69,10 @@ class FoodListingController extends Controller {
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $food = Food::find($id);
         return view('editFood')->with('food', $food);
@@ -83,12 +80,11 @@ class FoodListingController extends Controller {
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -108,11 +104,10 @@ class FoodListingController extends Controller {
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $food = Food::find($id);
         $food->delete();
