@@ -18,7 +18,9 @@ class CreateFoodsTable extends Migration
             $table->string('name');
             $table->string('calorie_count');
             $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
             $table->string('description');
             $table->timestamps();
         });

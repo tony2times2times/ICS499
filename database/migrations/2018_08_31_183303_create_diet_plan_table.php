@@ -17,6 +17,7 @@ class CreateDietPlanTable extends Migration
             $table->increments('id');
             $table->string('calories_day');
             $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
