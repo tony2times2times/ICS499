@@ -17,12 +17,15 @@ class CreateFoodsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('calorie_count');
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->string('description');
             $table->timestamps();
+        });
+
+        Schema::table('foods', function ($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
         });
     }
 
