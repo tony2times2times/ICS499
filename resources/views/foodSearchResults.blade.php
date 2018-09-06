@@ -9,7 +9,6 @@
                 {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}
                 {!! Form::text('search', null, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
                     {{Form::bsSubmit('Search')}}
-                {{--{!! Form::submit('Search', ['class'=>'btn btn-default']) !!}--}}
                 {!! Form::close() !!}
                 </div>
             </div>
