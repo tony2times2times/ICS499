@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Food;
 
-class DashboardController extends Controller {
+class DashboardController extends Controller
+{
     const MealOptions = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
-
 
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -23,7 +24,8 @@ class DashboardController extends Controller {
      * Show the application dashboard.
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $user_id = auth()->user()->id;
 
         $user = User::find($user_id);

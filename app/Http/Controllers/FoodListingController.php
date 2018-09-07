@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Food;
+use App\User;
+use App\FoodEaten;
 use Illuminate\Http\Request;
 
 class FoodListingController extends Controller
@@ -113,5 +115,24 @@ class FoodListingController extends Controller
         $food->delete();
 
         return redirect('/dashboard')->with('success', 'Food Removed');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function foodEaten(Request $request)
+    {
+        $this->validate($request, [
+            'meal' => 'required',
+        ]);
+
+        $foodEaten = new FoodEaten();
+        $foodEaten->food_id = $request->input('foodId');
+        $foodEaten->user_id = auth()->user()->id;
+        $foodEaten->save();
+
+        return redirect('/dashboard')->with('success', 'Food Added');
     }
 }
