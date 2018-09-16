@@ -16,6 +16,7 @@ Route::get('/', 'FoodListingController@index');
 Auth::routes();
 
 Route::get('queries', 'QueryController@search');
+Route::post('queries', 'FoodListingController@foodEaten');
 
 Route::get('/dashboard', 'DashboardController@index');
 

@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class DietPlan extends Model
 {
-    public function user(){
+    protected $table = "diet_plan";
+
+    public function users(){
         return $this->belongsTo('App\User');
     }
 }
