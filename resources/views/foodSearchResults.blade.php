@@ -46,7 +46,8 @@
                                     </td>
                                     <td>
                                     <td>
-                                        {!!Form::open(['action' => ['FoodListingController@foodEaten'],'method' => 'POST', 'class' => 'pull-left', 'onsubmit' => 'return confirm("Are you sure?")'])!!}
+                                        {!!Form::open(['action' => ['FoodListingController@foodEaten'],'method' => 'POST', 'class' => 'pull-left'])!!}
+                                        {{Form::hidden('foodId', $food->id)}}
                                         {{Form::select('meal', ['Breakfast' => 'Breakfast','Lunch' => 'lunch','Dinner' => 'dinner']) }}
                                         {{Form::bsSubmit('Add', ['class' => 'btn btn-success'])}}
                                         {!! Form::close() !!}
