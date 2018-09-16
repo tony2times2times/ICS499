@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    {{--page specific css--}}
+    <link href="{{ asset('/css/foodSearchResults.css') }}" rel="stylesheet">
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

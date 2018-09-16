@@ -7,7 +7,7 @@
                 <div class="panel-heading">Diet Plan
                     <span class="pull-right">
                        @if(!empty($dietPlan[0]))
-                        <a class="btn btn-default" href="/dietPlan/{{$dietPlan[0]->id}}/edit">Edit</a>
+                        <a class="btn btn-default btn-xs" href="/dietPlan/{{$dietPlan[0]->id}}/edit">Edit</a>
                        @endif
                         <a href="/dietPlan/create" class="btn btn-success btn-xs">Add Diet Plan</a>
                     </span>
