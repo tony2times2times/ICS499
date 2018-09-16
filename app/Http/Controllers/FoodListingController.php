@@ -131,6 +131,7 @@ class FoodListingController extends Controller
         $foodEaten = new FoodEaten();
         $foodEaten->food_id = $request->input('foodId');
         $foodEaten->user_id = auth()->user()->id;
+        $foodEaten->meal = $request->input('meal');
         $foodEaten->save();
 
         return redirect('/dashboard')->with('success', 'Food Added');

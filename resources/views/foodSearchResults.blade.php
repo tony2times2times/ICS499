@@ -7,7 +7,7 @@
                 <div class="panel-heading">Search Foods</div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}
-                    {!! Form::text('search', null, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
+                    {!! Form::text('search', NULL, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
                     {{Form::bsSubmit('Search')}}
                     {!! Form::close() !!}
                 </div>
@@ -46,10 +46,9 @@
                                     </td>
                                     <td>
                                     <td>
-                                    {!!Form::open(['action' => ['FoodListingController@foodEaten'],'method' => 'POST', 'class' => 'pull-left', 'onsubmit' => 'return confirm("Are you sure?")'])!!}
-                                        {{Form::hidden('foodId', $food->id)}}
+                                        {!!Form::open(['action' => ['FoodListingController@foodEaten'],'method' => 'POST', 'class' => 'pull-left', 'onsubmit' => 'return confirm("Are you sure?")'])!!}
+                                        {{Form::select('meal', ['Breakfast' => 'Breakfast','Lunch' => 'lunch','Dinner' => 'dinner']) }}
                                         {{Form::bsSubmit('Add', ['class' => 'btn btn-success'])}}
-                                        {{Form::select('meal',['Breakfast' => 'Breakfast','Lunch' => 'lunch','Dinner' => 'dinner','snack' => 'snack'], ['name' => 'meal'])}}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>

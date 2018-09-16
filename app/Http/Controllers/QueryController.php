@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Food;
+use App\FoodEaten;
 use Illuminate\Http\Request;
 
 class QueryController extends Controller {
@@ -10,7 +11,8 @@ class QueryController extends Controller {
     {
         // Gets the query string from our form submission
         $query = $request['search'];
-        $results = Food::where('name', 'like', '%' . $query . '%')->get();
+        $food = new Food();
+        $results = $food->where('name', 'like', '%' . $query . '%')->get();
 
         return view('foodSearchResults')->with('foods', $results);
     }
