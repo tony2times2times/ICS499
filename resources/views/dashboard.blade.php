@@ -5,11 +5,16 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Diet Plan
-                    <span class="pull-right"><a href="/dietPlan/create" class="btn btn-success btn-xs">Add Diet Plan</a></span>
+                    <span class="pull-right">
+                       @if(!empty($dietPlan[0]))
+                        <a class="btn btn-default" href="/dietPlan/{{$dietPlan[0]->id}}/edit">Edit</a>
+                       @endif
+                        <a href="/dietPlan/create" class="btn btn-success btn-xs">Add Diet Plan</a>
+                    </span>
                 </div>
                 <div class="panel-body">
                     @if(!empty($dietPlan[0]))
-                        <h2 class="text-primary">{{$dietPlan[0]->calories_day}}</h2>
+                        <h2 class="text-primary">{{$dietPlan[0]->calories_day}} - {{$caloriesEatenToday ?? 0}} </h2>
                     @endif
                 </div>
             </div>
@@ -17,7 +22,7 @@
                 <div class="panel-heading">Search Foods</div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}
-                    {!! Form::text('search', null, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
+                    {!! Form::text('search', NULL, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
                     {{Form::bsSubmit('Search')}}
                     {!! Form::close() !!}
                 </div>
