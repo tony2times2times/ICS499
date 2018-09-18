@@ -7,7 +7,9 @@
                 <div class="panel-heading">Create Diet Plan <a href="/dashboard" class="pull-right btn btn-default btn-xs">Go Back</a></div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'DietPlanController@store','method' => 'POST'])!!}
-                    {{Form::bsText('calories_day','',['placeholder' => 'Calorie Intake Per Day'])}}
+                    {{Form::bsText('weight','',['placeholder' => 'Target Weight Loss'])}}
+                    {{Form::label('date', 'Target Date')}}
+                    {{ Form::date('date', \Carbon\Carbon::now())}}
                     {{Form::bsSubmit('submit')}}
                     {!! Form::close() !!}
                 </div>

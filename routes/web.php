@@ -11,14 +11,17 @@
 |
 */
 
-Route::get('/', 'FoodListingController@index');
-
 Auth::routes();
 
 Route::get('queries', 'QueryController@search');
+Route::post('queries', 'FoodListingController@foodEaten');
 
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::resource('foods', 'FoodListingController');
 
 Route::resource('dietPlan', 'DietPlanController');
+
+Route::resource('profile', 'ProfileController');
+
+Route::get('/', 'HomeController@show');
