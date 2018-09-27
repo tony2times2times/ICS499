@@ -7,8 +7,9 @@
                 <div class="panel-heading">Edit Food <a href="/dashboard" class="pull-right btn btn-default btn-xs">Go Back</a></div>
                 <div class="panel-body">
                     {!!Form::open(['action' => ['ProfileController@update', $user->id],'method' => 'POST'])!!}
-                    {{Form::bsText('name',$user->name,['placeholder' => 'Food Name'])}}
-                    {{Form::bsText('email',$user->email,['placeholder' => 'Calorie Count'])}}
+                    {{Form::bsText('name',$user->name,['placeholder' => 'Name'])}}
+                    {{Form::bsText('email',$user->email,['placeholder' => 'Email'])}}
+                    {{Form::bsText('calories',$user->calorie_per_day,['placeholder' => 'Calorie Intake Per Day'])}}
                     {{Form::hidden('_method', 'PUT')}}
                     {{Form::bsSubmit('submit')}}
                     {!! Form::close() !!}
