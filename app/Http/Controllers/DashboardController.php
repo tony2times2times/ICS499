@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $viewData = [
             'foods' => $user->foods,
             'dietPlan' => $user->dietPlan,
-            'mealOptions' => self::MealOptions,
+            'mealOptions' => Food::MealOptions,
         ];
 
         return view('dashboard')->with($viewData);
