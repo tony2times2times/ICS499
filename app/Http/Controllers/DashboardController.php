@@ -11,7 +11,6 @@ use App\FoodEaten;
 class DashboardController extends Controller
 {
 
-    const MealOptions = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
     /**
      * Create a new controller instance.
@@ -34,7 +33,7 @@ class DashboardController extends Controller
 
         $user = User::find($user_id);
 
-        $foodsEaten = $this->getFoodsEatenByUser($user_id);
+        $foodsEaten = Food::getFoodsEatenByUser($user_id);
         // Get all foods created by this user
         $user->foods = Food::all()->where('user_id', $user_id);
 
@@ -44,32 +43,11 @@ class DashboardController extends Controller
         $viewData = [
             'foods' => $user->foods,
             'dietPlan' => $user->dietPlan,
-            'mealOptions' => self::MealOptions,
+            'mealOptions' => Food::MealOptions,
         ];
 
         return view('dashboard')->with($viewData);
     }
 
-    /**
-     * @param int $user_id
-     * @return array $foodsEatenSorted
-     */
-    protected function getFoodsEatenByUser(int $user_id)
-    {
-        $foodsEatenSorted = [];
-        $foodsEaten = FoodEaten::all()->where('user_id', $user_id);
 
-        if (!empty($foodsEaten)) {
-            foreach (self::MealOptions as $option) {
-                foreach ($foodsEaten as $item) {
-                    if ($item->meal == $option) {
-                        $foodsEatenSorted[$option] = $item;
-                    }
-                }
-                // Create and array of foods eaten by time e.g foodsEaten['breakfast'] = ['apple','bananna']
-            }
-        }
-
-        return $foodsEatenSorted;
-    }
 }

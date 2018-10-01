@@ -41,12 +41,15 @@ class ProfileController extends Controller
             'email' => 'required',
         ]);
 
-
         try {
             $user_id = auth()->user()->id;
             $user = User::find($user_id);
             $user->name = $request->get('name');
             $user->email = $request->get('email');
+            $user->gender = $request->get('gender');
+            $user->height = $request->get('height');
+            $user->weight = $request->get('weight');
+            $user->calories = $request->get('calories');
             $user->save();
         } catch (\Exception $exception) {
             // todo Handle

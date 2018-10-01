@@ -34,7 +34,7 @@ class DietPlanController extends Controller
             'date' => 'required',
         ]);
 
-        $this->calculatePlan($request);
+        DietPlan::calculatePlan($request);
 
         // Create DietPlan
         $dietPlan = new DietPlan();
@@ -46,13 +46,6 @@ class DietPlanController extends Controller
         return redirect('/dashboard')->with('success', 'Diet Plan Created');
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     */
-    protected function calculatePlan(Request $request)
-    {
-        // TODO handle diet plan calculation
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +70,7 @@ class DietPlanController extends Controller
             'date' => 'required',
         ]);
 
-        $this->calculatePlan($request);
+        DietPlan::calculatePlan($request);
 
         $dietPlan = DietPlan::find($id);
         $dietPlan->calories_day = $request->input('calories_day');
