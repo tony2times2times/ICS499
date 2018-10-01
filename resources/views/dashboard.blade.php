@@ -4,6 +4,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
+                <div class="panel-heading">Progress</div>
+                <div id="stocks-div"></div>
+                @if(isset($lava))
+                    <?= $lava->render('LineChart', 'Stocks', 'stocks-div') ?>
+                @endif
+            </div>
+            <div class="panel panel-default">
                 <div class="panel-heading">Diet Plan
                     <span class="pull-right">
                        @if(!empty($dietPlan[0]))
