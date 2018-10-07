@@ -24,4 +24,4 @@ Route::resource('dietPlan', 'DietPlanController');
 
 Route::resource('profile', 'ProfileController');
 
-Route::get('/', 'HomeController@show');
+Route::get('/', 'HomeController@index');

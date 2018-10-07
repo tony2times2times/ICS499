@@ -8,6 +8,11 @@ use App\User;
 class ProfileController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
@@ -40,18 +45,20 @@ class ProfileController extends Controller
             'name' => 'required',
             'email' => 'required',
         ]);
-
-
+        $status = "User Updated";
         try {
-            $user_id = auth()->user()->id;
-            $user = User::find($user_id);
+            $user = User::find($id);
             $user->name = $request->get('name');
             $user->email = $request->get('email');
+            $user->age = $request->get('age');
+            $user->gender = $request->get('gender');
+            $user->height = $request->get('height');
+            $user->weight = $request->get('weight');
             $user->save();
         } catch (\Exception $exception) {
-            // todo Handle
+            $status = "Unable to update profile";
         }
 
-        return redirect('/dashboard')->with('success', 'User Updated');
+        return redirect('/dashboard')->with('success', $status);
     }
 }
