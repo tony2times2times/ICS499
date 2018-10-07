@@ -14,6 +14,8 @@ use Khill\Lavacharts\Lavacharts;
 class DashboardChart extends Model
 {
 
+    const CHARTLENGTH = "10";
+
     /**
      * @throws \Exception
      * @return array
@@ -25,8 +27,26 @@ class DashboardChart extends Model
 
         try {
             $data->addDateColumn('Day of Month')
-                ->addNumberColumn('Projected')
-                ->addNumberColumn('Official');
+                ->addNumberColumn('Goal')
+                ->addNumberColumn('Actual');
+
+            //TODO implement when finishing charts
+            // Set timezone
+            //date_default_timezone_set('UTC');
+            //
+            //// Start date
+            //$date = date("c", time());
+            //// End date
+            //$endDate = date("Y-m-d", strtotime("+" . \self::CHARTLENGTH . " day", strtotime($date)));
+            //
+            //while (strtotime($date) <= strtotime($endDate)) {
+            //
+            //
+            //
+            //    $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+            //
+            //    $foods = FoodEaten::getFoodsEatenPerDay($date);
+            //}
 
             // Random Data
             for ($a = 1; $a < 30; $a++) {
@@ -39,8 +59,8 @@ class DashboardChart extends Model
                 $data->addRow($rowData);
             }
 
-            $lava->LineChart('Stocks', $data, [
-                'title' => 'Stock Market Trends',
+            $lava->LineChart('Calories', $data, [
+                'title' => 'Calories Burned',
                 'animation' => [
                     'startup' => TRUE,
                     'easing' => 'inAndOut',

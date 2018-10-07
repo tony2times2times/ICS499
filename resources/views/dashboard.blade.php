@@ -7,7 +7,7 @@
                 <div class="panel-heading">Progress</div>
                 <div id="stocks-div"></div>
                 @if(isset($lava))
-                    <?= $lava->render('LineChart', 'Stocks', 'stocks-div') ?>
+                    <?= $lava->render('LineChart', 'Calories', 'stocks-div') ?>
                 @endif
             </div>
             <div class="panel panel-default">
