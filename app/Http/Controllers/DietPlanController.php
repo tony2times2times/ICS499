@@ -34,14 +34,8 @@ class DietPlanController extends Controller
             'date' => 'required',
         ]);
 
-        DietPlan::calculatePlan($request);
-
-        // Create DietPlan
-        $dietPlan = new DietPlan();
-        $dietPlan->calories_day = $request->input('calories_day');
-        $dietPlan->user_id = auth()->user()->id;
-
-        $dietPlan->save();
+        $id = auth()->user()->id;
+        DietPlan::calculatePlan($request, $id);
 
         return redirect('/dashboard')->with('success', 'Diet Plan Created');
     }
@@ -60,21 +54,17 @@ class DietPlanController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Http\Controllers\int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'weight' => 'required',
             'date' => 'required',
         ]);
 
-        DietPlan::calculatePlan($request);
-
-        $dietPlan = DietPlan::find($id);
-        $dietPlan->calories_day = $request->input('calories_day');
-        $dietPlan->save();
+        $id = auth()->user()->id;
+        DietPlan::calculatePlan($request, $id);
 
         return redirect('/dashboard')->with('success', 'Diet Plan Updated');
     }
@@ -91,8 +81,8 @@ class DietPlanController extends Controller
             $dietPlan->delete();
         }
         else {
-            // todo throw exception
+            $error = "Unable to Remove Diet Plan";
         }
-        return redirect('/dashboard')->with('success', 'Diet Plan Removed');
+        return redirect('/dashboard')->with('success', isset($error) ? $error : 'Diet Plan Removed');
     }
 }

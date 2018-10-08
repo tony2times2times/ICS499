@@ -15,13 +15,46 @@ class DietPlan extends Model
     }
 
     /**
-     * 1lb weight loss == 3500 calories in a week / 7 day
-     * @param \Illuminate\Http\Request $request
+     * @param $request
+     * @param \App\int $id
      */
-    public static function calculatePlan(Request $request)
+    public static function calculatePlan($request, int $id)
     {
-        // TODO handle diet plan calculation
 
+        $user = User::find($id);
+        $kg = $user->weight * (1 / 2.2046226218);
+        $cm = $user->height * .3937;
 
+        if ($user->gender === 'Male') {
+            $calories = (9.99 * $kg + 6.25 * $cm - 4.92 * $user->age + 5) * 1.2;
+        }
+        else {
+            $calories = (9.99 * $kg + 6.25 * $cm - 4.92 * $user->age - 161) * 1.2;
+        }
+
+        $dateDiff = time() - $request->get('date');
+        $dateDiff = round($dateDiff / (60 * 60 * 24));
+
+        if ($request->get('goal') === 'lose') {
+            $weightLossPerDay = $dateDiff / $request->get('weight') * 3500;
+            $dailyCalories = $calories - $weightLossPerDay / 7;
+        }
+        elseif ($request->get('goal') === 'lose') {
+            $weightLossPerDay = $dateDiff / $request->get('target') * 3500;
+            $dailyCalories = $calories + $weightLossPerDay / 7;
+        }
+        else {
+            $dailyCalories = $calories;
+        }
+
+        $dietPlan = DietPlan::all()->where('user_id', $id);
+        if (empty($dietPlan)) {
+            $dietPlan = new DietPlan();
+        }
+        $dietPlan->user_id = $id;
+        $dietPlan->weight = (int) $request->get('weight');
+        $dietPlan->target_date = $request->get('date');
+        $dietPlan->calories_day = (int) $dailyCalories;
+        $dietPlan->save();
     }
 }
