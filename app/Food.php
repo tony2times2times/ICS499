@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Food extends Model
 {
+
     const MealOptions = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsTo('App\User');
-    }
-
-    public function category(){
-        return $this->belongsTo('App\Category');
     }
 
     /**
@@ -32,7 +30,6 @@ class Food extends Model
                         $foodsEatenSorted[$option] = $item;
                     }
                 }
-                // Create and array of foods eaten by time e.g foodsEaten['breakfast'] = ['apple','bananna']
             }
         }
 
