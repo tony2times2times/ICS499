@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class DietPlan extends Model
 {
 
+    /**
+     * Table Name
+     * @var string $table
+     */
     protected $table = "diet_plan";
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function users()
     {
         return $this->belongsTo('App\User');
@@ -47,10 +54,13 @@ class DietPlan extends Model
             $dailyCalories = $calories;
         }
 
+        //TODO FIX ME
         $dietPlan = DietPlan::all()->where('user_id', $id);
         if (empty($dietPlan)) {
             $dietPlan = new DietPlan();
         }
+
+        $dietPlan = new DietPlan();
         $dietPlan->user_id = $id;
         $dietPlan->weight = (int) $request->get('weight');
         $dietPlan->target_date = $request->get('date');

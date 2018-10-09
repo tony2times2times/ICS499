@@ -3,30 +3,43 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class FoodEaten extends Model
 {
+
+    /**
+     * Table Name
+     * @var string $table
+     */
     protected $table = "food_eaten";
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function foods()
     {
         return $this->belongsTo('App\Food');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function users()
     {
         return $this->belongsTo('App\User');
     }
 
     /**
-     * @param \App\string $date
+     * @param \App\int $date
      * @param \App\int $userId
-     * @return array
+     * @return $foodsEaten
      */
-    public static function getFoodsEatenPerDay(string $date, int $userId)
+    public static function getFoodsEatenPerDay( $date, int $userId)
     {
+
         $foodsEaten = FoodEaten::all()
-            ->whereDate('created_at', $date)
+            ->where('created_at', '=', $date->toDateTimeString())
             ->where('user_id', $userId);
 
         return $foodsEaten ?? [];

@@ -9,6 +9,8 @@ use App\User;
 use App\Food;
 use App\FoodEaten;
 use Khill\Lavacharts\Charts\Chart;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -33,12 +35,17 @@ class DashboardController extends Controller
 
         $user = User::find($user_id);
 
+        $users = DB::table('users')
+            ->leftJoin('diet_plan', 'users.id', '=', 'diet_plan.user_id')
+            ->where('users.id', $user_id)
+            ->get();
+
         $foodsEaten = Food::getFoodsEatenByUser($user_id);
+
         // Get all foods created by this user
         $user->foods = Food::all()->where('user_id', $user_id);
 
-        // Get the diet plan for this user
-        $user->dietPlan = DietPlan::all()->where('user_id', $user_id);
+        $caloriesEatenToday = FoodEaten::getFoodsEatenPerDay(Carbon::now(), $user_id);
 
         // Create Chart
         $lava = new DashboardChart();
@@ -46,8 +53,12 @@ class DashboardController extends Controller
 
         $viewData = [
             'foods' => $user->foods,
-            'dietPlan' => $user->dietPlan,
+            'dietPlan' => $users,
             'mealOptions' => Food::MealOptions,
+            'breakfastFoodsEaten' => $foodsEaten['Breakfast'] ?? [],
+            'lunchFoodsEaten' => $foodsEaten['Lunch'] ?? [],
+            'dinnerFoodsEaten' => $foodsEaten['Dinner'] ?? [],
+            'caloriesEatenToday' => $caloriesEatenToday,
         ];
 
         $viewData = array_merge($viewData, $lava);

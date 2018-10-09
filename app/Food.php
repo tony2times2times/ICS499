@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Food extends Model
 {
@@ -18,21 +19,23 @@ class Food extends Model
      * @param int $user_id
      * @return array $foodsEatenSorted
      */
-    public static function getFoodsEatenByUser(int $user_id)
+    public static function getFoodsEatenByUser(int $user_id): array
     {
         $foodsEatenSorted = [];
-        $foodsEaten = FoodEaten::all()->where('user_id', $user_id);
+        $foodsEaten = DB::table('food_eaten')
+            ->leftJoin('foods', 'food_eaten.food_id', '=', 'foods.id')
+            ->where('food_eaten.user_id', $user_id)
+            ->get();
 
         if (!empty($foodsEaten)) {
             foreach (self::MealOptions as $option) {
                 foreach ($foodsEaten as $item) {
                     if ($item->meal == $option) {
-                        $foodsEatenSorted[$option] = $item;
+                        $foodsEatenSorted[$option][] = $item;
                     }
                 }
             }
         }
-
         return $foodsEatenSorted;
     }
 }

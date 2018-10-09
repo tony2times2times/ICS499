@@ -9,6 +9,21 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    ///**
+    // * Attributes
+    // */
+    //protected $id;
+    //protected $name;
+    //protected $email;
+    //protected $password;
+    //protected $weight;
+    //protected $weight_update_times;
+    //protected $age;
+    //protected $gender;
+    //protected $height;
+    //protected $created_at;
+    //protected $updated_at;
+
     /**
      * The attributes that are mass assignable.
      *
