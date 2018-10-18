@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -31,15 +32,15 @@ class FoodEaten extends Model
     }
 
     /**
-     * @param \App\int $date
-     * @param \App\int $userId
-     * @return $foodsEaten
+     * @param Carbon $date
+     * @param int $userId
+     * @return FoodEaten[]|array|\Illuminate\Database\Eloquent\Collection
      */
-    public static function getFoodsEatenPerDay( $date, int $userId)
+    public static function getFoodsEatenPerDay(Carbon $date, int $userId)
     {
 
         $foodsEaten = FoodEaten::all()
-            ->where('created_at', '=', $date->toDateTimeString())
+            ->where('created_at', '=', $date->toDateString())
             ->where('user_id', $userId);
 
         return $foodsEaten ?? [];

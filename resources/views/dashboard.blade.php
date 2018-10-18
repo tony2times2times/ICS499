@@ -26,7 +26,10 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Search Foods</div>
+                <div class="panel-heading">
+                    Search Foods
+                    <span class="pull-right"><a href="/foods/create" class="btn btn-success btn-xs">Add Food</a></span>
+                </div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}
                     {!! Form::text('search', NULL, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
@@ -34,29 +37,29 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Foods
-                    <span class="pull-right"><a href="/foods/create" class="btn btn-success btn-xs">Add Food</a></span>
-                </div>
-                <div class="panel-body">
-                    <h3>Your Foods</h3>
-                    @if(!empty($foods))
-                        @include('commonFoodData')
-                    @endif
-                </div>
-                <div class="panel-body">
-                    @include('breakfast')
-                </div>
-                <div class="panel-body">
-                    @include('lunch')
-                </div>
-                <div class="panel-body">
-                    @include('dinner')
-                </div>
-                <div class="panel-body">
-                    @include('snacks')
-                </div>
-            </div>
+            {{--<div class="panel panel-default">--}}
+                {{--<div class="panel-heading">Foods--}}
+            {{--<span class="pull-right"><a href="/foods/create" class="btn btn-success btn-xs">Add Food</a></span>--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                    {{--<h3>Your Foods</h3>--}}
+                    {{--@if(!empty($foods))--}}
+                        {{--@include('commonFoodData')--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                    {{--@include('breakfast')--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                    {{--@include('lunch')--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                    {{--@include('dinner')--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                    {{--@include('snacks')--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
 @endsection

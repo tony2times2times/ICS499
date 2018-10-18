@@ -18,6 +18,9 @@ Route::post('queries', 'FoodListingController@foodEaten');
 
 Route::get('/dashboard', 'DashboardController@index');
 
+Route::get('/log', 'LogController@index');
+Route::get('/log/search', 'LogController@search');
+
 Route::resource('foods', 'FoodListingController');
 
 Route::resource('dietPlan', 'DietPlanController');
