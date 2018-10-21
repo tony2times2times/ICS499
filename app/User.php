@@ -9,6 +9,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
     ///**
     // * Attributes
     // */
@@ -42,4 +45,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return bool admin or not
+     */
+    public function isAdmin()    {
+        return $this->type === self::ADMIN_TYPE;
+    }
 }

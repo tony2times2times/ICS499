@@ -41,19 +41,19 @@ class Food extends Model
     }
 
     /**
-     * @param int $user_id
-     * @param Carbon $date
-     * @return array
+     * @param \App\int $user_id
+     * @param \App\String $date
+     * @return array $foodsEatenSorted
      */
-    public static function getFoodsEatenByUserPerDay(int $user_id, Carbon $date): array
+    public static function getFoodsEatenByUserPerDay(int $user_id, String $date): array
     {
         $foodsEatenSorted = [];
         $foodsEatenSorted['calories_eaten_per_day'] = 0;
-        
+
         $foodsEaten = DB::table('food_eaten')
             ->leftJoin('foods', 'food_eaten.food_id', '=', 'foods.id')
             ->where('food_eaten.user_id', $user_id)
-            ->whereDate('food_eaten.created_at', '=', $date->toDateString())
+            ->whereDate("food_eaten.created_at", "=", $date)
             ->get();
 
         if (!empty($foodsEaten)) {

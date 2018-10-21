@@ -21,7 +21,9 @@
                 </div>
                 <div class="panel-body">
                     @if(!empty($dietPlan[0]))
-                        <h2 class="text-primary">{{$dietPlan[0]->calories_day}} - {{$caloriesEatenToday ?? 0}} </h2>
+                        <h2>Total daily calories <b style="color: blue">{{$dietPlan[0]->calories_day}}</b></h2>
+                        <h2>You have consumed <b style="color: red">{{$caloriesEatenToday ?? 0}}</b> calories today.</h2>
+                        <h2>You can consume  <b style="color: green">{{$dietPlan[0]->calories_day - $caloriesEatenToday}}</b> more calories today.</h2>
                     @endif
                 </div>
             </div>
@@ -37,29 +39,6 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            {{--<div class="panel panel-default">--}}
-                {{--<div class="panel-heading">Foods--}}
-            {{--<span class="pull-right"><a href="/foods/create" class="btn btn-success btn-xs">Add Food</a></span>--}}
-                {{--</div>--}}
-                {{--<div class="panel-body">--}}
-                    {{--<h3>Your Foods</h3>--}}
-                    {{--@if(!empty($foods))--}}
-                        {{--@include('commonFoodData')--}}
-                    {{--@endif--}}
-                {{--</div>--}}
-                {{--<div class="panel-body">--}}
-                    {{--@include('breakfast')--}}
-                {{--</div>--}}
-                {{--<div class="panel-body">--}}
-                    {{--@include('lunch')--}}
-                {{--</div>--}}
-                {{--<div class="panel-body">--}}
-                    {{--@include('dinner')--}}
-                {{--</div>--}}
-                {{--<div class="panel-body">--}}
-                    {{--@include('snacks')--}}
-                {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 @endsection

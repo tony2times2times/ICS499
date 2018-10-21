@@ -8,19 +8,19 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Khill\Lavacharts\Lavacharts;
 
 class DashboardChart extends Model
 {
 
-    const CHARTLENGTH = "10";
-
     /**
+     * @param User $user
      * @throws \Exception
      * @return array
      */
-    public function getChart()
+    public function getChart($user)
     {
         $lava = new Lavacharts;
         $data = $lava->DataTable();
@@ -30,33 +30,21 @@ class DashboardChart extends Model
                 ->addNumberColumn('Goal')
                 ->addNumberColumn('Actual');
 
-            //TODO implement when finishing charts
-            // Set timezone
-            //date_default_timezone_set('UTC');
-            //
-            //// Start date
-            //$date = date("c", time());
-            //// End date
-            //$endDate = date("Y-m-d", strtotime("+" . \self::CHARTLENGTH . " day", strtotime($date)));
-            //
-            //while (strtotime($date) <= strtotime($endDate)) {
-            //
-            //
-            //
-            //    $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
-            //
-            //    $foods = FoodEaten::getFoodsEatenPerDay($date);
-            //}
+            if (!empty($user[0]->target_date)) {
+                $startTime = strtotime($user[0]->created_at);
+                $endTime = strtotime($user[0]->target_date);
 
-            // Random Data
-            for ($a = 1; $a < 30; $a++) {
-                $rowData = [
-                    "2017-4-$a",
-                    rand(800, 1000),
-                    rand(800, 1000),
-                ];
-
-                $data->addRow($rowData);
+                // Loop between timestamps, 24 hours at a time
+                for ($i = $startTime; $i <= $endTime; $i = $i + 86400) {
+                    $thisDate = date('Y-m-d', $i); // 2010-05-01, 2010-05-02, etc
+                    $foods = Food::getFoodsEatenByUserPerDay($user[0]->user_id, $thisDate);
+                    $caloriesEaten = $foods['calories_eaten_per_day'];
+                    $data->addRow([
+                        $thisDate,
+                        $user[0]->calories_day,
+                        $caloriesEaten,
+                    ]);
+                }
             }
 
             $lava->LineChart('Calories', $data, [

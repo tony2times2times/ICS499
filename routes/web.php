@@ -28,3 +28,7 @@ Route::resource('dietPlan', 'DietPlanController');
 Route::resource('profile', 'ProfileController');
 
 Route::get('/', 'HomeController@index');
+
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('is_admin')
+    ->name('admin');
