@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
 
+    const ImportCSV = FALSE;
+
     /**
      * Create a new controller instance.
      * @return void
@@ -39,6 +41,11 @@ class DashboardController extends Controller
             ->where('users.id', $user_id)
             ->get();
 
+        // Importer
+        if (self::ImportCSV == TRUE) {
+            $this->doImport();
+        }
+
         //$foodsEaten = Food::getFoodsEatenByUser($user_id);
 
         $foodsEaten = Food::getFoodsEatenByUserPerDay(auth()->user()->id, date('Y-m-d', time()));
@@ -63,5 +70,25 @@ class DashboardController extends Controller
         $viewData = array_merge($viewData, $lava);
 
         return view('dashboard')->with($viewData);
+    }
+
+    protected function doImport()
+    {
+        $row = 0;
+        if (($handle = fopen(public_path() . '/import_file.csv', 'r')) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+
+                $row++;
+                if ($row > 4) {
+                    $food = new Food();
+                    $food->name = $data[2];
+                    $food->calorie_count = $data[7];
+                    $food->user_id = 4;
+                    //$food->category = $data[1];
+                    $food->save();
+                }
+            }
+            fclose($handle);
+        }
     }
 }
