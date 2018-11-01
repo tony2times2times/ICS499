@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('queries', 'QueryController@search');
+Route::get('showAll', 'QueryController@showAll');
 Route::post('queries', 'FoodListingController@foodEaten');
 
 Route::get('/dashboard', 'DashboardController@index');
@@ -29,6 +30,6 @@ Route::resource('profile', 'ProfileController');
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/admin', 'AdminController@admin')
+Route::get('/admin', 'AdminController@index')
     ->middleware('is_admin')
     ->name('admin');

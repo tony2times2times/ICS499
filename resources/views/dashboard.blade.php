@@ -4,7 +4,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Progress</div>
+                <div class="panel-heading">Progress
+                    <span class="pull-right">
+                        <a href="/log" class="btn btn-primary btn-xs">Diet Log</a>
+                    </span></div>
                 <div id="stocks-div"></div>
                 @if(isset($lava))
                     <?= $lava->render('LineChart', 'Calories', 'stocks-div') ?>

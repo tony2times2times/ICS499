@@ -23,6 +23,8 @@
                 </div>
                 <div class="panel-body">
                     <h3>Foods Found</h3>
+                    <a class="btn" href="{{ URL::to( 'showAll' ) }}">Show All</a>
+                    {{--<a class="btn" href="{{ URL::to( 'QueryController/' ) }}">Next</a>--}}
                     @if(!empty($foods))
                         <table class="table table-striped">
                             <tr>
