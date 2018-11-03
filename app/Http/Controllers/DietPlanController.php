@@ -35,8 +35,15 @@ class DietPlanController extends Controller
         ]);
 
         $id = auth()->user()->id;
-        DietPlan::calculatePlan($request, $id);
-
+        $dietPlan = DietPlan::find($id) ?? '';
+        try {
+            DietPlan::calculatePlan($request, $id);
+        } catch (\Exception $exception) {
+            return view('editDietPlan')->with([
+                'message' => 'This is an unhealthy weight please choose a healthier goal',
+                'dietPlan' => $dietPlan,
+            ]);
+        }
         return redirect('/dashboard')->with('success', 'Diet Plan Created');
     }
 
@@ -62,9 +69,16 @@ class DietPlanController extends Controller
             'weight' => 'required',
             'date' => 'required',
         ]);
-
+        $dietPlan = DietPlan::find(auth()->user()->id);
         $id = auth()->user()->id;
-        DietPlan::calculatePlan($request, $id);
+        try {
+            DietPlan::calculatePlan($request, $id);
+        } catch (\Exception $exception) {
+            return view('editDietPlan')->with([
+                'message' => 'This is an unhealthy weight please choose a healthier goal',
+                'dietPlan' => $dietPlan,
+            ]);
+        }
 
         return redirect('/dashboard')->with('success', 'Diet Plan Updated');
     }

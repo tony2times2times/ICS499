@@ -49,6 +49,7 @@ class ProfileController extends Controller
         try {
             $user = User::find($id);
             $user->name = $request->get('name');
+            $user->password = $request->get('password');
             $user->email = $request->get('email');
             $user->age = $request->get('age');
             $user->gender = $request->get('gender');

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class DietPlan extends Model
 {
 
+    const MAXCALORIESPERDAY = 500;
+
     /**
      * Table Name
      * @var string $table
@@ -58,6 +60,10 @@ class DietPlan extends Model
         $dietPlan = DietPlan::all()->where('user_id', $id);
         if (empty($dietPlan)) {
             $dietPlan = new DietPlan();
+        }
+
+        if ((int) $dailyCalories >= self::MAXCALORIESPERDAY) {
+            throw new \Exception('This is an unhealthy wieght plan');
         }
 
         $dietPlan = new DietPlan();

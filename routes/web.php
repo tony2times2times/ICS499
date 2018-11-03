@@ -33,3 +33,4 @@ Route::get('/', 'HomeController@index');
 Route::get('/admin', 'AdminController@index')
     ->middleware('is_admin')
     ->name('admin');
+Route::post('createAdmin', 'AdminController@create');
