@@ -61,7 +61,7 @@ class Food extends Model
                 foreach ($foodsEaten as $item) {
                     if ($item->meal == $option) {
                         $foodsEatenSorted[$option][] = $item;
-                        $foodsEatenSorted['calories_eaten_per_day'] += $item->calorie_count;
+                        $foodsEatenSorted['calories_eaten_per_day'] += ($item->calorie_count * $item->number_servings);
                     }
                 }
             }

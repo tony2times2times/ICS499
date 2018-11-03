@@ -25,6 +25,7 @@ Route::get('/log/search', 'LogController@search');
 Route::resource('foods', 'FoodListingController');
 
 Route::resource('dietPlan', 'DietPlanController');
+Route::post('dietPlan', 'DietPlanController@update');
 
 Route::resource('profile', 'ProfileController');
 

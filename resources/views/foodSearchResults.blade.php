@@ -23,9 +23,8 @@
                 </div>
                 <div class="panel-body">
                     <h3>Foods Found</h3>
-                    <a class="btn" href="{{ URL::to( 'showAll' ) }}">Show All</a>
-                    {{--<a class="btn" href="{{ URL::to( 'QueryController/' ) }}">Next</a>--}}
                     @if(!empty($foods))
+                        {{ $foods->links() }}
                         <table class="table table-striped">
                             <tr>
                                 <th>Food Name</th>
@@ -50,9 +49,9 @@
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
-                                    <td>
                                         {!!Form::open(['action' => ['FoodListingController@foodEaten'],'method' => 'POST', 'class' => 'pull-left'])!!}
                                         {{Form::hidden('foodId', $food->id)}}
+                                        {{Form::selectRange('serving_size', 1, 10)}}
                                         {{Form::select('meal', ['Breakfast' => 'Breakfast','Lunch' => 'lunch','Dinner' => 'dinner']) }}
                                         {{Form::bsSubmit('Add', ['class' => 'btn btn-success'])}}
                                         {!! Form::close() !!}

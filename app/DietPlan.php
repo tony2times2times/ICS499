@@ -62,7 +62,7 @@ class DietPlan extends Model
             $dietPlan = new DietPlan();
         }
 
-        if ((int) $dailyCalories >= self::MAXCALORIESPERDAY) {
+        if ((int) $dailyCalories <= self::MAXCALORIESPERDAY) {
             throw new \Exception('This is an unhealthy wieght plan');
         }
 

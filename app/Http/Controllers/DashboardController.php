@@ -52,7 +52,6 @@ class DashboardController extends Controller
         // Get all foods created by this user
         $user->foods = Food::all()->where('user_id', $user_id);
 
-
         // Create Chart
         $lava = new DashboardChart();
         $lava = $lava->getChart($users);
@@ -75,11 +74,11 @@ class DashboardController extends Controller
     protected function doImport()
     {
         $row = 0;
-        if (($handle = fopen(public_path() . '/import_file.csv', 'r')) !== FALSE) {
+        if (($handle = fopen(public_path() . '/import_file_final.csv', 'r')) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
 
                 $row++;
-                if ($row > 4) {
+                if ($row > 3) {
                     $food = new Food();
                     $food->name = $data[2];
                     $food->calorie_count = $data[7];

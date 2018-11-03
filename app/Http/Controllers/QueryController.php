@@ -19,21 +19,10 @@ class QueryController extends Controller
         $query = $request['search'];
         $food = new Food();
 
-        $resultsPerPage = $request->get('showAll') ?? 25;
-
         $results = $food->where('name', 'like', '%' . $query . '%')
-            ->where('id', '>', 50)
-            ->simplePaginate($resultsPerPage);
+            ->simplePaginate(25);
 
-        // get previous user id
-        $previous = $food->where('id', '<', $food)->max('id');
-
-        // get next user id
-        $next = $food->where('id', '>', $food)->min('id');
-
-        $previous = 0;
-        $next = 0;
-        return view('foodSearchResults')->with('foods', $results, 'previous', $previous, 'next', $next);
+        return view('foodSearchResults')->with('foods', $results);
     }
 
 
