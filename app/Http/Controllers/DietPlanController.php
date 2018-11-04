@@ -30,6 +30,7 @@ class DietPlanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'goal' => 'required',
             'weight' => 'required',
             'date' => 'required',
         ]);
@@ -66,6 +67,7 @@ class DietPlanController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
+            'goal' => 'required',
             'weight' => 'required',
             'date' => 'required',
         ]);

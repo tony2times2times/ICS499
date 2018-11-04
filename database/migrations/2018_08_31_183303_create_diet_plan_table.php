@@ -20,6 +20,7 @@ class CreateDietPlanTable extends Migration
             $table->integer('calories_day');
             $table->integer('weight');
             $table->date('target_date');
+            $table->string('goal');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });

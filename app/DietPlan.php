@@ -41,14 +41,15 @@ class DietPlan extends Model
             $calories = (9.99 * $kg + 6.25 * $cm - 4.92 * $user->age - 161) * 1.2;
         }
 
-        $dateDiff = time() - $request->get('date');
-        $dateDiff = round($dateDiff / (60 * 60 * 24));
+        //$dateDiff = time() - $request->get('date');
+        //$dateDiff = round($dateDiff / (60 * 60 * 24));
 
-        if ($request->get('goal') === 'lose') {
+        $dateDiff = round(abs(strtotime($request->get('date'))-strtotime(  date('Y-m-d')))/86400);
+        if ($request->get('goal') === 'Lose') {
             $weightLossPerDay = $dateDiff / $request->get('weight') * 3500;
             $dailyCalories = $calories - $weightLossPerDay / 7;
         }
-        elseif ($request->get('goal') === 'lose') {
+        elseif ($request->get('goal') === 'Gain') {
             $weightLossPerDay = $dateDiff / $request->get('target') * 3500;
             $dailyCalories = $calories + $weightLossPerDay / 7;
         }
@@ -56,12 +57,7 @@ class DietPlan extends Model
             $dailyCalories = $calories;
         }
 
-        //TODO FIX ME
-        $dietPlan = DietPlan::all()->where('user_id', $id);
-        if (empty($dietPlan)) {
-            $dietPlan = new DietPlan();
-        }
-
+        DietPlan::where('user_id', $id)->delete();
         if ((int) $dailyCalories <= self::MAXCALORIESPERDAY) {
             throw new \Exception('This is an unhealthy wieght plan');
         }
@@ -71,6 +67,7 @@ class DietPlan extends Model
         $dietPlan->weight = (int) $request->get('weight');
         $dietPlan->target_date = $request->get('date');
         $dietPlan->calories_day = (int) $dailyCalories;
+        $dietPlan->goal = $request->get('goal');
         $dietPlan->save();
     }
 }
