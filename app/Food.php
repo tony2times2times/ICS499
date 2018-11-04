@@ -2,40 +2,70 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Food extends Model
 {
+
     const MealOptions = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsTo('App\User');
-    }
-
-    public function category(){
-        return $this->belongsTo('App\Category');
     }
 
     /**
      * @param int $user_id
      * @return array $foodsEatenSorted
      */
-    public static function getFoodsEatenByUser(int $user_id)
+    public static function getFoodsEatenByUser(int $user_id): array
     {
         $foodsEatenSorted = [];
-        $foodsEaten = FoodEaten::all()->where('user_id', $user_id);
+        $foodsEaten = DB::table('food_eaten')
+            ->leftJoin('foods', 'food_eaten.food_id', '=', 'foods.id')
+            ->where('food_eaten.user_id', $user_id)
+            ->get();
 
         if (!empty($foodsEaten)) {
             foreach (self::MealOptions as $option) {
                 foreach ($foodsEaten as $item) {
                     if ($item->meal == $option) {
-                        $foodsEatenSorted[$option] = $item;
+                        $foodsEatenSorted[$option][] = $item;
                     }
                 }
-                // Create and array of foods eaten by time e.g foodsEaten['breakfast'] = ['apple','bananna']
             }
         }
+        return $foodsEatenSorted;
+    }
 
+    /**
+     * @param \App\int $user_id
+     * @param \App\String $date
+     * @return array $foodsEatenSorted
+     */
+    public static function getFoodsEatenByUserPerDay(int $user_id, String $date): array
+    {
+        $foodsEatenSorted = [];
+        $foodsEatenSorted['calories_eaten_per_day'] = 0;
+
+        $foodsEaten = DB::table('food_eaten')
+            ->leftJoin('foods', 'food_eaten.food_id', '=', 'foods.id')
+            ->where('food_eaten.user_id', $user_id)
+            ->whereDate("food_eaten.created_at", "=", $date)
+            ->get();
+
+        if (!empty($foodsEaten)) {
+            foreach (self::MealOptions as $option) {
+                foreach ($foodsEaten as $item) {
+                    if ($item->meal == $option) {
+                        $foodsEatenSorted[$option][] = $item;
+                        $foodsEatenSorted['calories_eaten_per_day'] += ($item->calorie_count * $item->number_servings);
+                    }
+                }
+            }
+        }
         return $foodsEatenSorted;
     }
 }

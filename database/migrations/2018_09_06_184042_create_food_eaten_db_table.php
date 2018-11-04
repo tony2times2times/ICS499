@@ -21,6 +21,7 @@ class CreateFoodEatenDbTable extends Migration
             $table->integer('food_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('meal')->nullable();
+            $table->integer('number_servings');
             $table->timestamps();
         });
 

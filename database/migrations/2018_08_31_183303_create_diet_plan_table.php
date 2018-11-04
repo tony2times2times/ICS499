@@ -17,9 +17,10 @@ class CreateDietPlanTable extends Migration
     {
         Schema::create('diet_plan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('calories_day');
-            $table->date('weight');
+            $table->integer('calories_day');
+            $table->integer('weight');
             $table->date('target_date');
+            $table->string('goal');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });

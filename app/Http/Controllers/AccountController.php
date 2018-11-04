@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class AccountController extends Controller
 {
 
     public function __construct()
@@ -19,7 +19,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('profile');
+        return view('account');
     }
 
     /**
@@ -28,9 +28,8 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return view('profile')->with('user', $user);
+        $user = User::find(auth()->user()->id);
+        return view('account')->with('user', $user);
     }
 
     /**
@@ -41,16 +40,22 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $status = "User Updated";
+        $this->validate($request, [
+            'email' => 'required',
+        ]);
+
+        $status = "Account Updated";
         try {
             $user = User::find($id);
-            $user->age = $request->get('age');
-            $user->gender = $request->get('gender');
-            $user->height = $request->get('height');
-            $user->weight = $request->get('weight');
+
+            if (!empty($request->get('password'))) {
+                $user->password = $request->get('password');
+            }
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
             $user->save();
         } catch (\Exception $exception) {
-            $status = "Unable to update profile";
+            $status = "Unable to account";
         }
 
         return redirect('/dashboard')->with('success', $status);

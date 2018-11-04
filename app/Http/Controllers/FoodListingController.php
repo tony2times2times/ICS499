@@ -43,13 +43,13 @@ class FoodListingController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'email'
+            'email' => 'email',
         ]);
 
         // Create Food
         $food = new Food();
         $food->name = $request->input('name');
-        $food->calorie_count = (int)$request->input('calorie_count');
+        $food->calorie_count = (int) $request->input('calorie_count');
         $food->description = $request->input('description');
         $food->user_id = auth()->user()->id;
 
@@ -95,7 +95,7 @@ class FoodListingController extends Controller
         // Create Food
         $food = Food::find($id);
         $food->name = $request->input('name');
-        $food->calorie_count = (int)$request->input('calorie_count');
+        $food->calorie_count = (int) $request->input('calorie_count');
         $food->description = $request->input('description');
         $food->user_id = auth()->user()->id;
 
@@ -132,6 +132,7 @@ class FoodListingController extends Controller
         $foodEaten->food_id = $request->input('foodId');
         $foodEaten->user_id = auth()->user()->id;
         $foodEaten->meal = $request->input('meal');
+        $foodEaten->number_servings = $request->input('serving_size');
         $foodEaten->save();
 
         return redirect('/dashboard')->with('success', 'Food Added');
