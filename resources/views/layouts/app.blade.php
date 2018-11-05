@@ -22,6 +22,7 @@
 </head>
 <body>
 <div id="app">
+    @yield('scripts')
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -61,6 +62,7 @@
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                     <a href="/profile/{{auth()->user()->id}}/edit">Profile</a>
+                                    <a href="/account/{{auth()->user()->id}}/edit">Account</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

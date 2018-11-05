@@ -18,7 +18,7 @@ class CreateFoodsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('calorie_count');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });

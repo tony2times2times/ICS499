@@ -41,15 +41,9 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-        ]);
         $status = "User Updated";
         try {
             $user = User::find($id);
-            $user->name = $request->get('name');
-            $user->email = $request->get('email');
             $user->age = $request->get('age');
             $user->gender = $request->get('gender');
             $user->height = $request->get('height');

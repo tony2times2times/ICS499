@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('role')->nullable();
             $table->string('password');
             $table->string('weight')->nullable();
             $table->timestamp('weight_update_times')->nullable();

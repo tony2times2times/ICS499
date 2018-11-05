@@ -4,7 +4,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Progress</div>
+                <div class="panel-heading">Progress
+                    <span class="pull-right">
+                        <a href="/log" class="btn btn-primary btn-xs">Diet Log</a>
+                    </span></div>
                 <div id="stocks-div"></div>
                 @if(isset($lava))
                     <?= $lava->render('LineChart', 'Calories', 'stocks-div') ?>
@@ -21,40 +24,22 @@
                 </div>
                 <div class="panel-body">
                     @if(!empty($dietPlan[0]))
-                        <h2 class="text-primary">{{$dietPlan[0]->calories_day}} - {{$caloriesEatenToday ?? 0}} </h2>
+                        <h2>Total daily calories <b style="color: blue">{{$dietPlan[0]->calories_day}}</b></h2>
+                        <h2>You have consumed <b style="color: red">{{$caloriesEatenToday ?? 0}}</b> calories today.</h2>
+                        <h2>You can consume  <b style="color: green">{{$dietPlan[0]->calories_day - $caloriesEatenToday}}</b> more calories today.</h2>
                     @endif
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Search Foods</div>
+                <div class="panel-heading">
+                    Search Foods
+                    <span class="pull-right"><a href="/foods/create" class="btn btn-success btn-xs">Add Food</a></span>
+                </div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}
                     {!! Form::text('search', NULL, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
                     {{Form::bsSubmit('Search')}}
                     {!! Form::close() !!}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Foods
-                    <span class="pull-right"><a href="/foods/create" class="btn btn-success btn-xs">Add Food</a></span>
-                </div>
-                <div class="panel-body">
-                    <h3>Your Foods</h3>
-                    @if(!empty($foods))
-                        @include('commonFoodData')
-                    @endif
-                </div>
-                <div class="panel-body">
-                    @include('breakfast')
-                </div>
-                <div class="panel-body">
-                    @include('lunch')
-                </div>
-                <div class="panel-body">
-                    @include('dinner')
-                </div>
-                <div class="panel-body">
-                    @include('snacks')
                 </div>
             </div>
         </div>

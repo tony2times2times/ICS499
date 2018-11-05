@@ -1,3 +1,7 @@
 form.pull-left {
     display: inline-flex;
 }
+
+select {
+    margin-right: 10px;
+}
