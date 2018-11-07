@@ -26,6 +26,7 @@ Route::resource('foods', 'FoodListingController');
 
 Route::resource('dietPlan', 'DietPlanController');
 Route::post('dietPlan', 'DietPlanController@update');
+Route::post('dietPlan', 'DietPlanController@store');
 
 Route::resource('account', 'AccountController');
 Route::resource('profile', 'ProfileController');

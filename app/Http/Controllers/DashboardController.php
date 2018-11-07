@@ -37,7 +37,7 @@ class DashboardController extends Controller
         $user = User::find($user_id);
 
         $users = DB::table('users')
-            ->leftJoin('diet_plan', 'users.id', '=', 'diet_plan.user_id')
+            ->join('diet_plan', 'users.id', '=', 'diet_plan.user_id')
             ->where('users.id', $user_id)
             ->get();
 

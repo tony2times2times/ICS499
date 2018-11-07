@@ -17,16 +17,17 @@
                 <div class="panel-heading">Diet Plan
                     <span class="pull-right">
                        @if(!empty($dietPlan[0]))
-                        <a class="btn btn-default btn-xs" href="/dietPlan/{{$dietPlan[0]->id}}/edit">Edit</a>
-                       @endif
-                        <a href="/dietPlan/create" class="btn btn-success btn-xs">Add Diet Plan</a>
+                            <a class="btn btn-default btn-xs" href="/dietPlan/{{$dietPlan[0]->id}}/edit">Edit</a>
+                        @else
+                            <a href="/dietPlan/create" class="btn btn-success btn-xs">Add Diet Plan</a>
+                        @endif
                     </span>
                 </div>
                 <div class="panel-body">
                     @if(!empty($dietPlan[0]))
                         <h2>Total daily calories <b style="color: blue">{{$dietPlan[0]->calories_day}}</b></h2>
                         <h2>You have consumed <b style="color: red">{{$caloriesEatenToday ?? 0}}</b> calories today.</h2>
-                        <h2>You can consume  <b style="color: green">{{$dietPlan[0]->calories_day - $caloriesEatenToday}}</b> more calories today.</h2>
+                        <h2>You can consume <b style="color: green">{{$dietPlan[0]->calories_day - $caloriesEatenToday}}</b> more calories today.</h2>
                     @endif
                 </div>
             </div>
