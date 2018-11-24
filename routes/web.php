@@ -37,3 +37,6 @@ Route::get('/admin', 'AdminController@index')
     ->middleware('is_admin')
     ->name('admin');
 Route::post('createAdmin', 'AdminController@create');
+
+Route::resource('feedback', 'FeedbackController');
+Route::resource('adminFeedback', 'AdminFeedbackController');

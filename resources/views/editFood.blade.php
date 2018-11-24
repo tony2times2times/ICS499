@@ -13,6 +13,14 @@
                     {{Form::hidden('_method', 'PUT')}}
                     {{Form::bsSubmit('submit')}}
                     {!! Form::close() !!}
+                    @if(auth()->user()->isAdmin() == TRUE)
+                        <div style="padding-top: 10px;">
+                        {!!Form::open(['action' => ['FoodListingController@destroy', $food->id],'method' => 'POST', 'class' => 'pull-left', 'onsubmit' => 'return confirm("Are you sure?")'])!!}
+                        {{Form::hidden('_method', 'DELETE')}}
+                        {{Form::bsSubmit('Delete', ['class' => 'btn btn-danger'])}}
+                        {!! Form::close() !!}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

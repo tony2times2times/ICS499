@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DashboardChart;
-use App\DietPlan;
-use Illuminate\Http\Request;
 use App\User;
 use App\Food;
-use App\FoodEaten;
-use Khill\Lavacharts\Charts\Chart;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -35,7 +31,6 @@ class DashboardController extends Controller
         $user_id = auth()->user()->id;
 
         $user = User::find($user_id);
-
         $users = DB::table('users')
             ->join('diet_plan', 'users.id', '=', 'diet_plan.user_id')
             ->where('users.id', $user_id)
