@@ -7,5 +7,6 @@ To create Project:
   3. Start MySql server and Create the database with the name and password outlined in the ".env File" e.g "DB_DATABASE=TheDataBaseName"
   4. Run "composer install"
   5. Run "composer update"
+  6. Run "php artisan serve"
   6. Run "php artisan migrate"
-  7. To start the built in Laravel server run "php artisan serve" *Go to the url returned from the command
+  7. Go to the url returned from the "php artisan serve" command
