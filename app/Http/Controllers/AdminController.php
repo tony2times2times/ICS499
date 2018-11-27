@@ -15,7 +15,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        $user = User::all()->where('id', '!=', auth()->user()->id);
+
+        $user = User::where('id', '!=', auth()->user()->id)
+            ->paginate(25);
+
         return view('admin')->with('user', $user);
     }
 }

@@ -11,7 +11,10 @@
             <th>Actions</th>
         </tr>
 
+        @if (!empty($user))
+            {{ $user->appends(Request::only('search'))->links() }}
         @foreach($user as $usr)
+
             <tr>
                 <td>{{$usr->name}}</td>
                 <td>
@@ -31,5 +34,6 @@
                 </td>
             </tr>
         @endforeach
+            @endif
     </table>
 @endsection

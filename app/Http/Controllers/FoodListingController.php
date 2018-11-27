@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Food;
-use App\User;
 use App\FoodEaten;
 use Illuminate\Http\Request;
 
@@ -60,7 +59,7 @@ class FoodListingController extends Controller
 
     /**
      * Display the specified resource.
-     * @param  int $id
+     * @param \App\Http\Controllers\int $id
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
@@ -71,7 +70,7 @@ class FoodListingController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param  int $id
+     * @param \App\Http\Controllers\int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id)
@@ -83,7 +82,7 @@ class FoodListingController extends Controller
     /**
      * Update the specified resource in storage.
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \App\Http\Controllers\int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
@@ -105,16 +104,16 @@ class FoodListingController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Controllers\int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(int $id)
     {
         $food = Food::find($id);
         $food->delete();
 
-        return redirect('/dashboard')->with('success', 'Food Removed');
+        return redirect('/queries')->with('success', 'Food Removed');
     }
 
     /**

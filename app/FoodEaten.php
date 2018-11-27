@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\DB;
 class FoodEaten extends Model
 {
 
+    ///**
+    // * Attributes
+    // */
+    //protected $id;
+    //protected $food_id;
+    //protected $user_id;
+    //protected $meal;
+    //protected $number_servings;
+    //protected $created_at;
+    //protected $updated_at;
+
     /**
      * Table Name
      * @var string $table

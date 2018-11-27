@@ -9,6 +9,18 @@ class DietPlan extends Model
 
     const MAXCALORIESPERDAY = 500;
 
+    ///**
+    // * Attributes
+    // */
+    //protected $id;
+    //protected $calories_day;
+    //protected $weight;
+    //protected $target_date;
+    //protected $goal;
+    //protected $user_id;
+    //protected $created_at;
+    //protected $updated_at;
+
     /**
      * Table Name
      * @var string $table
@@ -40,9 +52,6 @@ class DietPlan extends Model
         else {
             $calories = (9.99 * $kg + 6.25 * $cm - 4.92 * $user->age - 161) * 1.2;
         }
-
-        //$dateDiff = time() - $request->get('date');
-        //$dateDiff = round($dateDiff / (60 * 60 * 24));
 
         $dateDiff = round(abs(strtotime($request->get('date'))-strtotime(  date('Y-m-d')))/86400);
         if ($request->get('goal') === 'Lose') {

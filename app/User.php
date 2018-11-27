@@ -18,6 +18,7 @@ class User extends Authenticatable
     //protected $id;
     //protected $name;
     //protected $email;
+    //protected $role;
     //protected $password;
     //protected $weight;
     //protected $weight_update_times;
