@@ -9,6 +9,25 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
+    ///**
+    // * Attributes
+    // */
+    //protected $id;
+    //protected $name;
+    //protected $email;
+    //protected $role;
+    //protected $password;
+    //protected $weight;
+    //protected $weight_update_times;
+    //protected $age;
+    //protected $gender;
+    //protected $height;
+    //protected $created_at;
+    //protected $updated_at;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,8 +46,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // Add One to many relationship
-    public function listings(){
-      return $this->hasMany('App\Listing');
+    /**
+     * @return bool admin or not
+     */
+    public function isAdmin()    {
+        return $this->role === self::ADMIN_TYPE;
     }
 }

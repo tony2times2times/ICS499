@@ -1,0 +1,6 @@
+.info-image {
+  float: left;
+  width:250px; /* you can use % */
+  height: auto;
+  padding: 20px;
+}

@@ -22,6 +22,7 @@
 </head>
 <body>
 <div id="app">
+    @yield('scripts')
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -53,14 +54,31 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+                        @if(auth()->user()->isAdmin() == TRUE)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Backend Pages <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="/admin">Admin</a>
+                                        <a href="/adminFeedback">User Feedback</a>
+                                        <a href="/queries">Food Edit</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
+
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                     <a href="/profile/{{auth()->user()->id}}/edit">Profile</a>
+                                    <a href="/account/{{auth()->user()->id}}/edit">Account</a>
+                                    <a href="/feedback">Send Feedback</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
