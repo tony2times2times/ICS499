@@ -14,7 +14,7 @@
                 @endif
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Diet Plan
+                <div class="panel-heading">My Diet Plan
                     <span class="pull-right">
                        @if(!empty($dietPlan[0]))
                             <a class="btn btn-default btn-xs" href="/dietPlan/{{$dietPlan[0]->id}}/edit">Edit</a>
