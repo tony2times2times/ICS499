@@ -15,7 +15,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <div class="panel-heading">Search Results <a href="/dashboard" class="pull-right btn btn-default btn-xs">Dashboard</a>
+            <div class="panel-heading">Search Results
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">Foods

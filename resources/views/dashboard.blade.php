@@ -39,7 +39,7 @@
                 <div class="panel-body">
                     {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}
                     {!! Form::text('search', NULL, ['required', 'class'=>'form-control', 'placeholder'=>'Search for food...']) !!}
-                    {{Form::bsSubmit('Search')}}
+                    <span class="pull-right ">{{Form::bsSubmit('Search', ['class'=>'btn-search'])}}</span>
                     {!! Form::close() !!}
                 </div>
             </div>

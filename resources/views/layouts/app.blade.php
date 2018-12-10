@@ -47,7 +47,10 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                  <li class="{{ Request::is('dashboard') ? 'active nav-item' : 'nav-item' }}"><a href="/dashboard" class="navbar-nav {{ Request::is('/dashboard') ? 'active' : '' }}">Dashboard</a></li>
+                  <li class="{{ Request::is('log') ? 'active nav-item' : 'nav-item' }}"><a href="/log" class="navbar-nav">My Log</a></li>
+                  <li class="{{ Request::is('dietPlan/create') ? 'active nav-item' : 'nav-item' }}"><a href="/dietPlan/create" class="navbar-nav">Diet Plan</a></li>
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->

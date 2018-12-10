@@ -6,7 +6,9 @@
  */
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-
+.btn-search{
+  margin-top: 10px;
+}
 .weight-red{
   color: mediumorchid !important;
   padding-left: 0 !important;
