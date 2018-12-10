@@ -6,16 +6,17 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Diet Plan <a href='{{ url()->previous() }}' class="pull-right btn btn-default btn-xs">Go Back</a></div>
+                <div class="panel-heading text-center">Create Diet Plan</div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'DietPlanController@store','method' => 'POST'])!!}
-                    {{Form::label('goal', 'DietPlan')}}
-                    {{Form::select('goal', ['Lose' => 'Lose Weight','Gain' => 'Gain Weight','Maintain' => 'Maintain Weight']) }}
+                    {{Form::label('goal', 'DietPlan', ['class' => 'form-inline'])}}
+                    {{Form::select('goal', ['Lose' => 'Lose Weight','Gain' => 'Gain Weight','Maintain' => 'Maintain Weight'], null, ['class' => 'form-inline']) }}
+                    <br>
                     {{Form::label('weight', 'Target Weight Loss or Gain')}}
                     {{Form::number('weight','',['placeholder' => 'Target Weight'])}}
                     {{Form::label('date', 'Target Date')}}
-                    {{ Form::date('date', \Carbon\Carbon::now())}}
-                    {{Form::bsSubmit('submit')}}
+                    {{ Form::date('date', \Carbon\Carbon::now()->addDays(30))}}
+                    <div class="btn-space">{{Form::bsSubmit('submit')}}
                     {!! Form::close() !!}
                 </div>
             </div>

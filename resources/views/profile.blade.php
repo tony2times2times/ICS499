@@ -9,15 +9,18 @@
                 <div class="panel-heading">Edit Profile <a href='{{ url()->previous() }}' class="pull-right btn btn-default btn-xs">Go Back</a></div>
                 <div class="panel-body">
                     {!!Form::open(['action' => ['ProfileController@update', $user->id],'method' => 'POST'])!!}
-                    {{Form::bsText('gender',$user->gender,['placeholder' => 'Gender'])}}
+                    {{Form::bsText('gender',$user->gender,['placeholder' => 'Gender', 'class' => 'form-inline'])}}
                     {{Form::label('age','Age')}}
                     {{Form::number('age',$user->age,['placeholder' => 'Age'])}}
+                    <br>
                     <br>
                     {{Form::label('height','Height Inches')}}
                     {{Form::number('height',$user->height,['placeholder' => 'Height Inches'])}}
                     <br>
+                    <br>
                     {{Form::label('weight','Weight Lbs')}}
                     {{Form::number('weight',$user->weight,['placeholder' => 'Weight Lbs'])}}
+                    <br>
                     <br>
                     {{Form::hidden('_method', 'PUT')}}
                     {{Form::bsSubmit('submit')}}

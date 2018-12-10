@@ -46,19 +46,20 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @if (Auth::guest())
+                @else
                 <ul class="nav navbar-nav">
                   <li class="{{ Request::is('dashboard') ? 'active nav-item' : 'nav-item' }}"><a href="/dashboard" class="navbar-nav {{ Request::is('/dashboard') ? 'active' : '' }}">Dashboard</a></li>
                   <li class="{{ Request::is('log') ? 'active nav-item' : 'nav-item' }}"><a href="/log" class="navbar-nav">My Log</a></li>
                   <li class="{{ Request::is('dietPlan/create') ? 'active nav-item' : 'nav-item' }}"><a href="/dietPlan/create" class="navbar-nav">Diet Plan</a></li>
-
                 </ul>
-
+                @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li class="{{ Request::is('login') ? 'active nav-item' : 'nav-item' }}"><a href="{{ route('login') }}">Login</a></li>
+                        <li class="{{ Request::is('register') ? 'active nav-item' : 'nav-item' }}"><a href="{{ route('register') }}">Register</a></li>
                     @else
                         @if(auth()->user()->isAdmin() == TRUE)
                             <li class="dropdown">
@@ -84,7 +85,7 @@
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                     <a href="/profile/{{auth()->user()->id}}/edit">Profile</a>
                                     <a href="/account/{{auth()->user()->id}}/edit">Account</a>
-                                    <a href="/feedback">Send Feedback</a>
+                                    <a href="/feedback">Contact Us</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

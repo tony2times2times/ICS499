@@ -8,14 +8,11 @@
                 <div class="panel-body">
                     {!!Form::open(['action' => 'LogController@search','method' => 'GET'])!!}
                     {!! Form::date('search', $date, ['required', 'class'=>'form-control']) !!}
-                    {{Form::bsSubmit('Search')}}
+                    <span class="pull-right btn-space">{{Form::bsSubmit('Search')}}</span>
                     {!! Form::close() !!}
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard
-                    <span class="pull-right"><a href="/dashboard" class="btn btn-success btn-xs">Dashboard</a></span>
-                </div>
                 <div class="panel-body">
                     @include('breakfast')
                 </div>

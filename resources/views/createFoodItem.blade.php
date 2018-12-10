@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Food Item <a href="/dashboard" class="pull-right btn btn-default btn-xs">Go Back</a></div>
+                <div class="panel-heading text-center">Create Food Item</div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'FoodListingController@store','method' => 'POST'])!!}
-                    {{Form::bsText('name','',['placeholder' => 'Food Name'])}}
-                    {{Form::bsText('calorie_count','',['placeholder' => 'Calorie Count'])}}
+                    {{Form::bsText('name','',['placeholder' => 'Food Name', 'class' => 'form-inline'])}}
+                    {{Form::bsText('calorie_count','',['placeholder' => 'Calorie Count', 'class' => 'form-inline'])}}
                     {{Form::bsTextArea('description','',['placeholder' => 'Food Description'])}}
-                    {{Form::bsSubmit('submit')}}
+                    <span class="pull-right ">{{Form::bsSubmit('submit')}}</span>
                     {!! Form::close() !!}
                 </div>
             </div>
