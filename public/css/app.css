@@ -6,6 +6,9 @@
  */
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+.btn, .btn-space{
+  background-color: gainsboro !important;
+}
 .btn-space{
   margin-top: 10px;
 }

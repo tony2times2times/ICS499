@@ -34,7 +34,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Search Foods
-                    <span class="pull-right"><a href="/foods/create" class="btn">Add Food</a></span>
+                    <span class="pull-right"><a href="/foods/create">Add Food</a></span>
                 </div>
                 <div class="panel-body">
                     {!!Form::open(['action' => 'QueryController@search','method' => 'GET'])!!}

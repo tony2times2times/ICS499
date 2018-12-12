@@ -16,9 +16,8 @@
                     {{Form::number('weight','',['placeholder' => 'Target Weight'])}}
                     {{Form::label('date', 'Target Date')}}
                     {{ Form::date('date', \Carbon\Carbon::now()->addDays(30))}}
-                    <div class="btn-space">{{Form::bsSubmit('submit')}}
-                    {!! Form::close() !!}
-                </div>
+                    {{Form::bsSubmit('submit', ['class' => 'btn-space'])}}
+                    {!! Form::close() !!}              
             </div>
         </div>
     </div>
